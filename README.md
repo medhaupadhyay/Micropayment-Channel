@@ -25,4 +25,11 @@ Copy and paste the code when prompted to fill in the code <br>
 Click “Verify and Publish” <br>
 You’re done!
 
+To use the contract: <br>
+On Etherscan, click on the "Contract" button (next to the blue "Transactions" button) <br>
+Click on the "Write Contract" button (next to the blue "Code" button) <br>
+Click "Connect to Web 3" and choose MetaMask when prompted <br>
+You can increment the methods as you wish <br>
+Click "Write" and the transaction should go through!
+
 
