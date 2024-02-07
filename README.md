@@ -2,7 +2,32 @@
 Micropayment Channel Capstone Project <br>
 Template Code taken from https://docs.soliditylang.org/en/latest/solidity-by-example.html#micropayment-channel
 
-# Step by Step Instructions
+# Using Our Micropayment Channel
+*Creating a New Channel* <br>
+Launch the index.html locally on your computer <br>
+Connect your MetaMask account <br>
+Click "Create New Contract" <br>
+Enter your MetaMask address as the "Sender Address" <br>
+Enter the "Receiver Address"; this is the person you will be sending Ethereum to <br>
+Click "Deploy Contract" <br>
+Check your MetaMask account and click on the transaction that just occured <br>
+Click "View on Etherscan" and copy the contract address; keep this for your records <br>
+<br>
+*Logging Payments on an Existing Channel* <br>
+Go back to the local site and click on "Log Continuing Payments with an Existing Contract" <br>
+Input the contract address when prompted <br>
+Input the amount of Ethereum you would like to send to the receiver <br>
+Click "Done" <br>
+<br>
+*Closing a Channel*<br>
+Note: this action is irreversible <br>
+Go to the local site and click "Claim Payment/ Close Channel" <br>
+Enter the contract address when prompted <br>
+Click "Close Channel" <br>
+The receiver should receive the Ethereum once the transaction goes through <br>
+
+
+# Deploying the Smart Contract
 Go to this link: https://docs.soliditylang.org/en/latest/solidity-by-example.html#the-full-contract <br>
 On the right, click “Open in Remix” <br>
 On the top left, make sure the compiler is on the latest version (0.8.23 in our case) <br>
