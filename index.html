@@ -11,21 +11,161 @@
 <body>
     <div class="container">
         <h2>Ethereum Transfer</h2>
-        <!-- Log in with MetaMask -->
-        <button id="loginButton">Log in with MetaMask</button>
-        <!-- Deploy contract -->
-        <button id="deployContractButton">Deploy Contract</button>
-        <!-- Receiver wallet -->
-        <label for="receiver">Receiver Wallet:</label>
-        <input type="text" id="receiver" required>
-        <!-- Amount -->
-        <label for="amount">Amount (ETH):</label>
-        <!-- <input type="number" id="amount" min="0" step="0.01" required> -->
-        <!-- Send button -->
-        <button id="sendButton">Send Ethereum</button>
-    </div>
+        
+        
+        <!-- Login With MetaMask-->
+        <!-- THIS NEEDS TO BE IMPLEMENTED-->
+        <h3>Log In</h3>
 
-    <script src="script.js"></script>
-</body>
+        <button id="loginButton" onclick="document.location='default.asp'">MetaMask Login</button>
+
+        <!-- Deploy New Channel -->
+        <!-- THIS NEEDS TO BE IMPLEMENTED-->
+
+        <h3>Create New Channel</h3>
+        <p>To open a payment channel with a new receiver, fill out the fields below. If you already have a channel with this receiver, go to "Log Payments on an Existing Channel" and enter the Contract address for that existing channel.</p>
+
+        <label for="sender">Sender Wallet Address:</label>
+        <input type="text" id="sender" required>
+        
+        <label for="receiver">Receiver Wallet Address:</label>
+        <input type="text" id="receiver" required>
+        <p> After deploying the contract, please store the contract address. You will need to enter this address below to log future payments.</p>
+
+        <button id="deployContractButton" onclick="document.location='default.asp'">Deploy Contract</button>
+
+        <!-- Log a New Channel-->
+        <!-- completed - Medha :) -->
+        <h3>Log a New Channel</h3>
+        <p> Enter the details of your newly created payment channel.</p>
+        <head>
+            <meta charset="UTF-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+            <title>Getting User Input</title>
+        </head>
+        <body>
+            <form onsubmit="return createNew()">
+                <label for="newAddress">New Contract Address:</label>
+                <input type="text" id="newAddress" required>
+          
+                <button type="submit">Submit</button>
+            </form>
+        
+            <script>
+                function createNew() {
+                    let newAddress = document.getElementById("newAddress").value;
+                    
+                    localStorage.setItem(newAddress, 0);
+                    console.log(newAddress); 
+                    alert("New channel has been logged with the following address: " + newAddress);
+                    return false;
+                }
+            </script>
+        </body> 
+
+
+        <!-- Log Payments on Existing Channel -->
+        <!-- completed - Medha :) -->
+        <h3>Log Payments on Existing Channel</h3>
+        
+        <p> Please keep in mind that logging a payment is <i>not</i> equivalent to making an Ethereum transfer. The receiver will not receive any funds until the payment channel is closed, at which point the transfer will be made. </p>
+
+    </body>
+
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Getting User Input</title>
+    </head>
+    <body>
+        <form onsubmit="return logPayment()">
+            <label for="name">Contract Address:</label>
+            <input type="text" id="name" required>
+    
+            <label for="score">Amount (ETH):</label>
+            <input type="text" id="score" required>
+    
+            <button type="submit">Log Payment</button>
+        </form>
+    
+        <script>
+            function logPayment() {
+                let userName = document.getElementById("name").value;
+                let userScore = parseFloat(document.getElementById("score").value);           
+                
+                const current = parseFloat(localStorage.getItem(userName))
+                //when a new channel is created, it is stored with a value of 0
+                newAmount = userScore + current;
+                /* the new amount is the previously logged amount + the newly entered amount */
+                userData = localStorage.setItem(userName, newAmount);
+                /* save the new amount under the key of the contract address */
+                console.log(newAmount); 
+                alert("Total amount owed to address " + userName + " is " + newAmount + ".");
+                return false;
+            }
+        </script>
+    </body> 
+
+
+        
+        <!-- Close Channel -->
+        <!-- total amount due is calculated and stored in the variable totalDue - Medha -->
+        <!--PENDING: transfer totalDue from sender to receiver using smart contract. -->
+
+        <h3>Close Channel</h3>
+        <label for="sendButton">Closing the channel will add up all the logs and send the total amount owed to the receiver. Please note that this is irreversible.</label>
+    
+
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Getting User Input</title>
+    </head>
+    <body>
+        <form onsubmit="return closeChannel()">
+            <label for="currentAddress">Contract Address:</label>
+            <input type="text" id="currentAddress" required>
+    
+            <button type="submit">Close Channel</button>
+        </form>
+    
+        <script>
+            function closeChannel() {
+                let currentAddress = document.getElementById("currentAddress").value;
+                //console.log(localStorage.getItem(currentAddress));
+                const totalDue = parseFloat(localStorage.getItem(currentAddress));
+                console.log(totalDue); 
+                alert("The channel at address " + currentAddress + " is being closed. " + totalDue + " ETH will be transferred to the receiver.");
+                return false;
+            }
+        </script>
+    </body> 
+
+
+</div>
+
+     
+     
+
+    <!-- localStorage simple example
+    <script>
+        const name = "medha"
+        localStorage.setItem('name', name);
+        const userData =localStorage.getItem('name');
+        console.log(userData);
+
+    </script>
+    -->
+
+    
+
+
+
+    <!-- <script src="script.js"></script> -->
+
+
+
+
+
 
 </html>
