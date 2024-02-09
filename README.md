@@ -61,7 +61,7 @@ The receiver should receive the Ethereum once the transaction goes through <br>
 
 # Our Features
 *Opening a New Payment Channel Through Interface* <br>
-We did this by using ... 
+We did this by using ... **ALSO UDATE REPORT METHODS TO MATCH**
 <br>
 <br>
 *Logging Payments Off-chain* <br>
@@ -69,5 +69,5 @@ This feature was implemented using key-value pairs in local storage. Each contra
 Since the total amount due is updated as the information comes in, closing the channel simply involves transferring the recorded dues from the sender to the receiver.   
 <br>
 *Closing a Payment Channel Through Interface* <br>
-We did this by using ...
+We did this by using ... **ALSO UDATE REPORT METHODS TO MATCH**
 <br>
