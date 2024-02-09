@@ -3,6 +3,7 @@ Micropayment Channel Capstone Project <br>
 Template Code taken from https://docs.soliditylang.org/en/latest/solidity-by-example.html#micropayment-channel
 
 # Deploying the Smart Contract
+*Code Setup* <br>
 Go to this link: https://docs.soliditylang.org/en/latest/solidity-by-example.html#the-full-contract <br>
 On the right, click “Open in Remix” <br>
 On the top left, make sure the compiler is on the latest version (0.8.23 in our case) <br>
@@ -12,7 +13,8 @@ Set environment to “MetaMask” and log in to your MetaMask account when promp
 Make sure the account address matches the MetaMask account address that you want to use; your account will be charged to deploy this smart contract <br>
 Click the red "Deploy" button <br>
 Confirm the transaction on the MetaMask pop up <br>
-
+<br>
+*Verifying and Publishing the Code* <br>
 Go to MetaMask and click on the transaction that just happened <br>
 Next to status, click on “View on Block Explorer” <br>
 Click on the address listed in the “To” field <br>
@@ -23,9 +25,9 @@ Set the compiler type to match the Solidity compiler you used (0.8.23 in our cas
 Set the license to “No License” <br>
 Copy and paste the code when prompted to fill in the code <br>
 Click “Verify and Publish” <br>
-You’re done!
-
-To use the contract: <br>
+You’re done! <br>
+<br>
+*To use the contract* <br>
 On Etherscan, click on the "Contract" button (next to the blue "Transactions" button) <br>
 Click on the "Write Contract" button (next to the blue "Code" button) <br>
 Click "Connect to Web 3" and choose MetaMask when prompted <br>
