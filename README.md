@@ -4,25 +4,26 @@ Template Code taken from https://docs.soliditylang.org/en/latest/solidity-by-exa
 
 # Using Our Micropayment Channel
 *Creating a New Channel* <br>
-Launch the index.html locally on your computer <br>
-Connect your MetaMask account <br>
-Click "Create New Contract" <br>
-Enter your MetaMask address as the "Sender Address" <br>
-Enter the "Receiver Address"; this is the person you will be sending Ethereum to <br>
+Launch index.html and styles.css locally on your computer <br>
+Login with MetaMask and connect your account <br>
+Under "Create New Channel", enter your MetaMask address as the "Sender Wallet Address" <br>
+Enter the "Receiver Wallet Address"; this is the person you will be sending Ethereum to <br>
 Click "Deploy Contract" <br>
 Check your MetaMask account and click on the transaction that just occured <br>
 Click "View on Etherscan" and copy the contract address; keep this for your records <br>
 <br>
+*Logging a New Channel*
+Enter the contract address of the newly created contract under "Log a New Channel" <br>
+Click "Submit"<br>
+<br>
 *Logging Payments on an Existing Channel* <br>
-Go back to the local site and click on "Log Continuing Payments with an Existing Contract" <br>
-Input the contract address when prompted <br>
+Under "Log Payments on an Existing Channel", enter the contract address <br>
 Input the amount of Ethereum you would like to send to the receiver <br>
-Click "Done" <br>
+Click "Log Payment" <br>
 <br>
 *Closing a Channel*<br>
 Note: this action is irreversible <br>
-Go to the local site and click "Claim Payment/ Close Channel" <br>
-Enter the contract address when prompted <br>
+Enter the contract address under "Close Channel" <br>
 Click "Close Channel" <br>
 The receiver should receive the Ethereum once the transaction goes through <br>
 
