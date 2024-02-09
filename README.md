@@ -68,6 +68,6 @@ We did this by using ...
 This feature was implemented using key-value pairs in local storage. Each contract address serves as a key and the amount that the sender owes the receiver is the value. When a new channel is logged, the contract address is registered in local storage with a value of zero. When a new payment is logged, the existing value is increased by the given amount. The new total amount owed is set as the value for that contract key. This value is then displayed to the user in a pop up message, so they are aware of how much they owe the receiver and that the payment was logged. <br>
 Since the total amount due is updated as the information comes in, closing the channel simply involves transferring the recorded dues from the sender to the receiver.   
 <br>
-*Closing a New Payment Channel Through Interface* <br>
+*Closing a Payment Channel Through Interface* <br>
 We did this by using ...
 <br>
