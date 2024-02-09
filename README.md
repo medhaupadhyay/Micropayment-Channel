@@ -34,19 +34,6 @@ Click "Connect to Web 3" and choose MetaMask when prompted <br>
 You can increment the methods as you wish <br>
 Click "Write" and the transaction should go through!
 
-# Our Features
-*Opening a New Payment Channel Through Interface* <br>
-We did this by using ... 
-<br>
-<br>
-*Logging Payments Off-chain* <br>
-This feature was implemented using key-value pairs in local storage. Each contract address serves as a key and the amount that the sender owes the receiver is the value. When a new channel is logged, the contract address is registered in local storage with a value of zero. When a new payment is logged, the existing value is increased by the given amount. The new total amount owed is set as the value for that contract key. This value is then displayed to the user in a pop up message, so they are aware of how much they owe the receiver and that the payment was logged. <br>
-Since the total amount due is updated as the information comes in, closing the channel simply involves transferring the recorded dues from the sender to the receiver.   
-<br>
-*Closing a New Payment Channel Through Interface* <br>
-We did this by using ...
-<br>
-
 # Using Our Micropayment Channel
 *Creating a New Channel* <br>
 Launch index.html and styles.css locally on your computer <br>
@@ -72,4 +59,15 @@ Enter the contract address under "Close Channel" <br>
 Click "Close Channel" <br>
 The receiver should receive the Ethereum once the transaction goes through <br>
 
-
+# Our Features
+*Opening a New Payment Channel Through Interface* <br>
+We did this by using ... 
+<br>
+<br>
+*Logging Payments Off-chain* <br>
+This feature was implemented using key-value pairs in local storage. Each contract address serves as a key and the amount that the sender owes the receiver is the value. When a new channel is logged, the contract address is registered in local storage with a value of zero. When a new payment is logged, the existing value is increased by the given amount. The new total amount owed is set as the value for that contract key. This value is then displayed to the user in a pop up message, so they are aware of how much they owe the receiver and that the payment was logged. <br>
+Since the total amount due is updated as the information comes in, closing the channel simply involves transferring the recorded dues from the sender to the receiver.   
+<br>
+*Closing a New Payment Channel Through Interface* <br>
+We did this by using ...
+<br>
