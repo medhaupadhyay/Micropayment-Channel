@@ -60,6 +60,10 @@ Click "Close Channel" <br>
 The receiver should receive the Ethereum once the transaction goes through <br>
 
 # Our Features
+*Logging in to MetaMask* <br>
+We did this by using ... **ALSO UDATE REPORT METHODS TO MATCH**
+<br>
+<br>
 *Opening a New Payment Channel Through Interface* <br>
 We did this by using ... **ALSO UDATE REPORT METHODS TO MATCH**
 <br>
