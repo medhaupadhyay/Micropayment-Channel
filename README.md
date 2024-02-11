@@ -60,12 +60,12 @@ Click "Close Channel" <br>
 The receiver should receive the Ethereum once the transaction goes through <br>
 
 # Our Features
-*Logging in to MetaMask* <br>
-We did this by using ... **ALSO UDATE REPORT METHODS TO MATCH**
+*Connecting to MetaMask* <br>
+Users will be provided a field where they can input their address as well as the receiver's address to connect to MetaMask and begin the transaction process. This was implemented through the integration of Solidity smart contracts (converted to bytecode) and Java, which were used to build the functionalities of the front-end interface. The smart contract acts as the MetaMask connection, while the program written in Java executes the entire process from start to finish. 
 <br>
 <br>
 *Opening a New Payment Channel Through Interface* <br>
-We did this by using ... **ALSO UDATE REPORT METHODS TO MATCH**
+Like the *Connecting to MetaMask* feature, opening a new payment channel involves the integration of Solidity and Java. The smart contract will initiate the transaction history between the sender & receiver and open a payment channel between the two parties. (Note: The user will not have to worry about the "contract address", as it will be stored and implemented in the back-end.) Once the addresses are verified as existing addressses, the sender will be permitted to enter an amount that they wish to send to the recipient. A unique signature will generate and the sender will be expected to store & save this signature some place safe for future reference or when the parties wish to close the current channel. Once the payment channel is open, the sender can send more transactions -- which will be logged off-chain -- as long as needed and until the channel has been closed.
 <br>
 <br>
 *Logging Payments Off-chain* <br>
@@ -73,5 +73,5 @@ This feature was implemented using key-value pairs in local storage. Each contra
 Since the total amount due is updated as the information comes in, closing the channel simply involves transferring the recorded dues from the sender to the receiver.   
 <br>
 *Closing a Payment Channel Through Interface* <br>
-We did this by using ... **ALSO UDATE REPORT METHODS TO MATCH**
+The final feature, closing the payment channel, integrates the smart contract, which includes a function that allows the user to close the current payment channel. The user will be prompted with a message ensuring that they are ready to close the channel. If the user permits, the channel will officially close, and this action cannot be reversed. Once the payment channel closes, all transactions made within the process will tally and be sent to the receiver in whole.
 <br>
