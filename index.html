@@ -17,7 +17,46 @@
         <h3>Log In</h3>
 
         <button id="loginButton">MetaMask Login</button>
+        <p id="errorMessage" style="color: rgb(208, 21, 0); display: none;"></p>
         <script>
+
+            document.addEventListener("DOMContentLoaded", function () {
+                const loginButton = document.getElementById("loginButton");
+                const errorMessage = document.getElementById("errorMessage");
+
+                loginButton.addEventListener("click", async function () {
+                    if (window.ethereum) {
+                        try {
+                            // Check if MetaMask is installed and the user is logged in
+                            if (window.ethereum.selectedAddress) {
+                                errorMessage.innerText = "You are already logged in with MetaMask.";
+                                errorMessage.style.display = "block";
+                                // You can perform further actions here if the user is already logged in
+                            } else {
+                                // Request account access if needed
+                                // await window.ethereum.request({ method: "eth_requestAccounts" });
+                                alert("MetaMask account already connected.");
+                                // You can perform further actions after successful login here
+                            }
+                        } catch (error) {
+                            errorMessage.innerText = "Error connecting MetaMask account: " + error.message;
+                            errorMessage.style.display = "block";
+                            console.error("Error connecting MetaMask account:", error);
+                        }
+                    } else {
+                        alert("MetaMask extension not detected.");
+                        // errorMessage.innerText = "MetaMask extension not detected";
+                        // errorMessage.style.display = "block";
+                        console.error("MetaMask extension not detected");
+                    }
+                });
+            });
+
+        </script>
+
+
+
+        <!-- <script>
             document.addEventListener("DOMContentLoaded", function () {
                 const loginButton = document.getElementById("loginButton");
 
@@ -36,7 +75,7 @@
                     }
                 });
             });
-        </script>
+        </script> -->
 
         <!-- Deploy New Channel -->
         <!-- THIS NEEDS TO BE IMPLEMENTED-->
