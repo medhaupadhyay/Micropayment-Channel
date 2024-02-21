@@ -349,10 +349,27 @@
     </form>
 
     <script>
+        // function splitSignature(sig) {
+        //     if (sig.length != 65) {
+        //         throw new Error("Invalid signature length");
+        //     }
+
+        //     const sigWithoutPrefix = sig.slice(2);
+        //     const r = '0x' + sigWithoutPrefix.slice(0, 64);
+        //     const s = '0x' + sigWithoutPrefix.slice(64, 128);
+        //     let v = parseInt(sigWithoutPrefix.slice(128, 130), 16);
+
+        //     if (v < 27) {
+        //         v += 27;
+        //     }
+
+        //     return {v, r, s}
+        // }
+        import crypto from "crypto";
         function logPayment() {
-            
             //enter signature code here
-            let senderSignature = "test"
+            const randomString = crypto.randomBytes(65).toString("hex");
+            let senderSignature = '0x' + randomString;
 
             //end signature code
             let userName = document.getElementById("name").value;
