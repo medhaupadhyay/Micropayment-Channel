@@ -85,11 +85,18 @@
             this receiver, go to "Log Payments on an Existing Channel" and enter the Contract address for that existing
             channel.</p>
 
-        <label for="sender">Sender Wallet Address:</label>
-        <input type="text" id="sender" required>
+        <!-- <label for="sender">Sender Wallet Address:</label> -->
+        <!-- <input type="text" id="sender" required> -->
 
         <label for="receiver">Receiver Wallet Address:</label>
         <input type="text" id="receiver" required>
+
+        <label for="deploymentAmount">Deployment Amount (initial amount that will be stored in the payment channel as soon as it is opened):</label>
+        <input type="text" id="deploymentAmount" required>
+
+        <label for="expirationTime">Expiration Time (if the amount of time specified passes and the receiver does not cash out their payments, the Ethereum will be returned to the sender):</label>
+        <input type="text" id="expirationTime" required>
+
         <p> After deploying the contract, please store the contract address. You will need to enter this address below
             to log future payments.</p>
 
@@ -117,10 +124,19 @@
             <script>
                 function createNew() {
                     let newAddress = document.getElementById("newAddress").value;
-
-                    localStorage.setItem(newAddress, 0);
-                    console.log(newAddress);
-                    alert("New channel has been logged with the following address: " + newAddress);
+                    addressStatus = "ok"
+                    for (var key in localStorage){
+                            //console.log(key)
+                            if (key == newAddress) 
+                               {addressStatus = "stop"}
+                            }
+                    console.log(addressStatus);
+                    if (addressStatus == "ok") 
+                        {localStorage.setItem(newAddress, 0);
+                        alert("New channel has been logged with the following address: " + newAddress);
+                        }
+                   else {alert ("Channel " + newAddress + " is already logged. Please proceed to logging a payment on an existing channel.")}
+                 
                     return false;
                 }
             </script>
@@ -128,7 +144,7 @@
 
 
         <!-- Log Payments on Existing Channel -->
-        <!-- completed - Medha :) -->
+        <!-- needs signature integration! - Medha :) -->
         <h3>Log Payments on Existing Channel</h3>
 
         <p> Please keep in mind that logging a payment is <i>not</i> equivalent to making an Ethereum transfer. The
@@ -156,6 +172,11 @@
 
     <script>
         function logPayment() {
+            
+            //enter signature code here
+            let senderSignature = "test"
+
+            //end signature code
             let userName = document.getElementById("name").value;
             let userScore = parseFloat(document.getElementById("score").value);
 
@@ -166,7 +187,7 @@
             userData = localStorage.setItem(userName, newAmount);
             /* save the new amount under the key of the contract address */
             console.log(newAmount);
-            alert("Total amount owed to address " + userName + " is " + newAmount + ".");
+            alert("Please copy the following message and securely send it to the receiver: \nTotal amount owed to address " + userName + " is " + newAmount + " (signature: " + senderSignature + ")");
             return false;
         }
     </script>
