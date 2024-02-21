@@ -14,6 +14,7 @@
 
 
         <!-- Login With MetaMask-->
+        <!-- Completed - Minh-->
         <h3>Log In</h3>
 
         <button id="loginButton">MetaMask Login</button>
@@ -80,13 +81,14 @@
         <!-- Deploy New Channel -->
         <!-- THIS NEEDS TO BE IMPLEMENTED-->
 
+       
         <h3>Create New Channel</h3>
         <p>To open a payment channel with a new receiver, fill out the fields below. If you already have a channel with
             this receiver, go to "Log Payments on an Existing Channel" and enter the Contract address for that existing
             channel.</p>
 
-        <!-- <label for="sender">Sender Wallet Address:</label> -->
-        <!-- <input type="text" id="sender" required> -->
+        <!-- <label for="sender">Sender Wallet Address:</label>
+        <input type="text" id="sender" required> -->
 
         <label for="receiver">Receiver Wallet Address:</label>
         <input type="text" id="receiver" required>
@@ -97,10 +99,186 @@
         <label for="expirationTime">Expiration Time (if the amount of time specified passes and the receiver does not cash out their payments, the Ethereum will be returned to the sender):</label>
         <input type="text" id="expirationTime" required>
 
+
+        <button id="saveButton">Save Addresses</button>
+
+
+        <!-- Getting address input and save it to use with the contract Minh-->
+        <!-- Right now I can save the input -->
+        <!-- Need to work on how to put it into the contract -->
+        <script>
+            document.addEventListener("DOMContentLoaded", function () {
+                const saveButton = document.getElementById("saveButton");
+                const receiverInput = document.getElementById("receiver");
+                const senderInput = document.getElementById("sender");
+                let receiverAddress;
+                let senderAddress;
+
+                saveButton.addEventListener("click", function () {
+                    receiverAddress = receiverInput.value;
+                    senderAddress = senderInput.value;
+                    console.log("Sender Address saved:", senderAddress);
+                    console.log("Receiver Address saved:", receiverAddress);
+                });
+
+            });
+
+        </script>
+
+
+
+
+        <!-- ///////////////////////////////////// -->
         <p> After deploying the contract, please store the contract address. You will need to enter this address below
             to log future payments.</p>
 
-        <button id="deployContractButton" onclick="document.location='default.asp'">Deploy Contract</button>
+        <button id="deployContractButton">Deploy Contract</button>
+        <!-- Deploy contract function -->
+        <!-- Work in progress Minh -->
+        <!-- Replace the ABI and ByteCode -->
+        <script src="https://cdn.jsdelivr.net/npm/web3@1.3.5/dist/web3.min.js"></script>
+        <script>
+            document.addEventListener("DOMContentLoaded", function () {
+                const deployButton = document.getElementById("deployContractButton");
+
+                deployButton.addEventListener("click", async function () {
+                    if (window.ethereum) {
+                        try {
+                            // Connect to MetaMask
+                            const accounts = await ethereum.request({ method: "eth_requestAccounts" });
+                            const account = accounts[0];
+
+                            // Create a new instance of web3 with MetaMask
+                            const web3 = new Web3(window.ethereum);
+
+                            // Define Solidity contract ABI (from Remix compiled contract)
+                            const contractABI = [
+                                // Put in our Solidity Contract's ABI here in the []
+                                [
+                                    {
+                                        "inputs": [
+                                            {
+                                                "internalType": "address payable",
+                                                "name": "recipientAddress",
+                                                "type": "address"
+                                            },
+                                            {
+                                                "internalType": "uint256",
+                                                "name": "duration",
+                                                "type": "uint256"
+                                            }
+                                        ],
+                                        "stateMutability": "payable",
+                                        "type": "constructor"
+                                    },
+                                    {
+                                        "inputs": [],
+                                        "name": "claimTimeout",
+                                        "outputs": [],
+                                        "stateMutability": "nonpayable",
+                                        "type": "function"
+                                    },
+                                    {
+                                        "inputs": [
+                                            {
+                                                "internalType": "uint256",
+                                                "name": "amount",
+                                                "type": "uint256"
+                                            },
+                                            {
+                                                "internalType": "bytes",
+                                                "name": "signature",
+                                                "type": "bytes"
+                                            }
+                                        ],
+                                        "name": "close",
+                                        "outputs": [],
+                                        "stateMutability": "nonpayable",
+                                        "type": "function"
+                                    },
+                                    {
+                                        "inputs": [],
+                                        "name": "expiration",
+                                        "outputs": [
+                                            {
+                                                "internalType": "uint256",
+                                                "name": "",
+                                                "type": "uint256"
+                                            }
+                                        ],
+                                        "stateMutability": "view",
+                                        "type": "function"
+                                    },
+                                    {
+                                        "inputs": [
+                                            {
+                                                "internalType": "uint256",
+                                                "name": "newExpiration",
+                                                "type": "uint256"
+                                            }
+                                        ],
+                                        "name": "extend",
+                                        "outputs": [],
+                                        "stateMutability": "nonpayable",
+                                        "type": "function"
+                                    },
+                                    {
+                                        "inputs": [],
+                                        "name": "recipient",
+                                        "outputs": [
+                                            {
+                                                "internalType": "address payable",
+                                                "name": "",
+                                                "type": "address"
+                                            }
+                                        ],
+                                        "stateMutability": "view",
+                                        "type": "function"
+                                    },
+                                    {
+                                        "inputs": [],
+                                        "name": "sender",
+                                        "outputs": [
+                                            {
+                                                "internalType": "address payable",
+                                                "name": "",
+                                                "type": "address"
+                                            }
+                                        ],
+                                        "stateMutability": "view",
+                                        "type": "function"
+                                    }
+                                ]
+                            ];
+
+                            // Put in Solidity contract bytecode (from Remix compiled contract)
+                            const contractBytecode = "608060405260405162000b2538038062000b25833981810160405281019062000029919062000161565b335f806101000a81548173ffffffffffffffffffffffffffffffffffffffff021916908373ffffffffffffffffffffffffffffffffffffffff1602179055508160015f6101000a81548173ffffffffffffffffffffffffffffffffffffffff021916908373ffffffffffffffffffffffffffffffffffffffff1602179055508042620000b69190620001d3565b60028190555050506200020d565b5f80fd5b5f73ffffffffffffffffffffffffffffffffffffffff82169050919050565b5f620000f382620000c8565b9050919050565b6200010581620000e7565b811462000110575f80fd5b50565b5f815190506200012381620000fa565b92915050565b5f819050919050565b6200013d8162000129565b811462000148575f80fd5b50565b5f815190506200015b8162000132565b92915050565b5f80604083850312156200017a5762000179620000c4565b5b5f620001898582860162000113565b92505060206200019c858286016200014b565b9150509250929050565b7f4e487b71000000000000000000000000000000000000000000000000000000005f52601160045260245ffd5b5f620001df8262000129565b9150620001ec8362000129565b9250828201905080821115620002075762000206620001a6565b5b92915050565b61090a806200021b5f395ff3fe608060405234801561000f575f80fd5b5060043610610060575f3560e01c80630e1da6c314610064578063415ffba71461006e5780634665096d1461008a57806366d003ac146100a857806367e404ce146100c65780639714378c146100e4575b5f80fd5b61006c610100565b005b610088600480360381019061008391906105e4565b610146565b005b61009261024d565b60405161009f919061064d565b60405180910390f35b6100b0610253565b6040516100bd91906106a5565b60405180910390f35b6100ce610278565b6040516100db91906106a5565b60405180910390f35b6100fe60048036038101906100f991906106be565b61029b565b005b60025442101561010e575f80fd5b5f8054906101000a900473ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff16ff5b60015f9054906101000a900473ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff163373ffffffffffffffffffffffffffffffffffffffff161461019e575f80fd5b6101a88282610308565b6101b0575f80fd5b60015f9054906101000a900473ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff166108fc8390811502906040515f60405180830381858888f19350505050158015610214573d5f803e3d5ffd5b505f8054906101000a900473ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff16ff5b60025481565b60015f9054906101000a900473ffffffffffffffffffffffffffffffffffffffff1681565b5f8054906101000a900473ffffffffffffffffffffffffffffffffffffffff1681565b5f8054906101000a900473ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff163373ffffffffffffffffffffffffffffffffffffffff16146102f1575f80fd5b60025481116102fe575f80fd5b8060028190555050565b5f8061033b308560405160200161032092919061079a565b6040516020818303038152906040528051906020012061039d565b90505f8054906101000a900473ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff1661037d82856103cc565b73ffffffffffffffffffffffffffffffffffffffff161491505092915050565b5f816040516020016103af9190610842565b604051602081830303815290604052805190602001209050919050565b5f805f806103d985610436565b9250925092506001868484846040515f81526020016040526040516104019493929190610891565b6020604051602081039080840390855afa158015610421573d5f803e3d5ffd5b50505060206040510351935050505092915050565b5f805f6041845114610446575f80fd5b602084015191506040840151905060608401515f1a92509193909250565b5f604051905090565b5f80fd5b5f80fd5b5f819050919050565b61048781610475565b8114610491575f80fd5b50565b5f813590506104a28161047e565b92915050565b5f80fd5b5f80fd5b5f601f19601f8301169050919050565b7f4e487b71000000000000000000000000000000000000000000000000000000005f52604160045260245ffd5b6104f6826104b0565b810181811067ffffffffffffffff82111715610515576105146104c0565b5b80604052505050565b5f610527610464565b905061053382826104ed565b919050565b5f67ffffffffffffffff821115610552576105516104c0565b5b61055b826104b0565b9050602081019050919050565b828183375f83830152505050565b5f61058861058384610538565b61051e565b9050828152602081018484840111156105a4576105a36104ac565b5b6105af848285610568565b509392505050565b5f82601f8301126105cb576105ca6104a8565b5b81356105db848260208601610576565b91505092915050565b5f80604083850312156105fa576105f961046d565b5b5f61060785828601610494565b925050602083013567ffffffffffffffff81111561062857610627610471565b5b610634858286016105b7565b9150509250929050565b61064781610475565b82525050565b5f6020820190506106605f83018461063e565b92915050565b5f73ffffffffffffffffffffffffffffffffffffffff82169050919050565b5f61068f82610666565b9050919050565b61069f81610685565b82525050565b5f6020820190506106b85f830184610696565b92915050565b5f602082840312156106d3576106d261046d565b5b5f6106e084828501610494565b91505092915050565b5f819050919050565b5f61070c61070761070284610666565b6106e9565b610666565b9050919050565b5f61071d826106f2565b9050919050565b5f61072e82610713565b9050919050565b5f8160601b9050919050565b5f61074b82610735565b9050919050565b5f61075c82610741565b9050919050565b61077461076f82610724565b610752565b82525050565b5f819050919050565b61079461078f82610475565b61077a565b82525050565b5f6107a58285610763565b6014820191506107b58284610783565b6020820191508190509392505050565b5f81905092915050565b7f19457468657265756d205369676e6564204d6573736167653a0a3332000000005f82015250565b5f610803601c836107c5565b915061080e826107cf565b601c82019050919050565b5f819050919050565b5f819050919050565b61083c61083782610819565b610822565b82525050565b5f61084c826107f7565b9150610858828461082b565b60208201915081905092915050565b61087081610819565b82525050565b5f60ff82169050919050565b61088b81610876565b82525050565b5f6080820190506108a45f830187610867565b6108b16020830186610882565b6108be6040830185610867565b6108cb6060830184610867565b9594505050505056fea264697066735822122071a3b3180d5c128a16e60a442973624338e0d2bc5ce02b5da78693c189c2805764736f6c63430008180033"; // Your contract's bytecode goes here
+
+                            // Create a new contract instance
+                            const contract = new web3.eth.Contract(contractABI);
+
+                            // Deploy the contract
+                            const deployedContract = await contract.deploy({
+                                data: contractBytecode,
+                            }).send({
+                                from: account,
+                            });
+
+                            console.log("Contract deployed at address:", deployedContract.options.address);
+                            alert("Contract deployed at address: " + deployedContract.options.address);
+                        } catch (error) {
+                            console.error("Error deploying contract:", error);
+                            alert("Error deploying contract: " + error.message);
+                        }
+                    } else {
+                        console.error("MetaMask extension not detected");
+                        alert("MetaMask extension not detected");
+                    }
+                });
+            });
+        </script>
+
+
 
         <!-- Log a New Channel-->
         <!-- completed - Medha :) -->
@@ -181,7 +359,6 @@
             let userScore = parseFloat(document.getElementById("score").value);
 
             const current = parseFloat(localStorage.getItem(userName))
-            //when a new channel is created, it is stored with a value of 0
             newAmount = userScore + current;
             /* the new amount is the previously logged amount + the newly entered amount */
             userData = localStorage.setItem(userName, newAmount);
@@ -200,8 +377,8 @@
 <!--PENDING: transfer totalDue from sender to receiver using smart contract. -->
 
 <h3>Close Channel</h3>
-<label for="sendButton">Closing the channel will add up all the logs and send the total amount owed to the receiver.
-    Please note that this is irreversible.</label>
+<p>Closing the channel will add up all the logs and send the total amount owed to the receiver.
+    Please note that this is irreversible.<p>
 
 
 <head>
@@ -229,6 +406,7 @@
         }
     </script>
 </body>
+
 
 
 </div>
