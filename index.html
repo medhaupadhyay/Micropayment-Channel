@@ -349,27 +349,44 @@
     </form>
 
     <script>
-        // function splitSignature(sig) {
-        //     if (sig.length != 65) {
-        //         throw new Error("Invalid signature length");
-        //     }
+        let contractAddress = document.getElementById("name").value
+        var hash = web3.utils.sha3("message to sign");
+        web3.eth.personal.sign(hash, web3.eth.defaultAccount, function () {
+            console.log("signed");
+        });
 
-        //     const sigWithoutPrefix = sig.slice(2);
-        //     const r = '0x' + sigWithoutPrefix.slice(0, 64);
-        //     const s = '0x' + sigWithoutPrefix.slice(64, 128);
-        //     let v = parseInt(sigWithoutPrefix.slice(128, 130), 16);
+        function signPayment(recipient, amount, nonce, contractAddress, callback) {
+            var hash = '0x' + web3.utils.soliditySHA3(
+                ["address", "uint256", "uint256", "address"],
+                [recipient, amount, nonce, contractAddress]
+            ).toString("hex");
 
-        //     if (v < 27) {
-        //         v += 27;
-        //     }
+            web3.eth.personal.sign(hash, web3.eth.defaultAccount, callback);
+        }
 
-        //     return {v, r, s}
-        // }
-        import crypto from "crypto";
+        function constructPaymentMessage(contractAddress, amount) {
+            return web3.utils.soliditySHA3(
+                ["address", "uint256"],
+                [contractAddress, amount]
+            );
+        }
+
+        function signMessage(message, callback) {
+            web3.eth.personal.sign(
+                '0x' + message.toString("hex"),
+                web3.eth.defaultAccount,
+                callback
+            );
+        }
+
         function logPayment() {
             //enter signature code here
-            const randomString = crypto.randomBytes(65).toString("hex");
-            let senderSignature = '0x' + randomString;
+            const receiverInput = document.getElementById("receiver");
+            const receiverAddress = receiverInput.value;
+            const amount = document.getElementById("score").value;
+            console.log(receiverAddress);
+
+            let senderSignature = signPayment(receiverAddress, amount, nonce, contractAddress);
 
             //end signature code
             let userName = document.getElementById("name").value;
