@@ -272,8 +272,8 @@
                                 data: contractBytecode,
                             }).send({
                                 from: account,
-                                gas: 15000000000,
-                                gasPrice: '30000000000'
+                                gas: 1500000,
+                                gasLimit: 1500000
                             });
 
                             console.log("Contract deployed at address:", deployedContract.options.address);
