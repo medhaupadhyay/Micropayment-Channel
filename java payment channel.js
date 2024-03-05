@@ -10,6 +10,7 @@ ethereum.request({method: 'eth_requestAccounts'})
     console.error('Error:', error);
 });
 
+// sign payment
 function constructPaymentMessage(contractAddress, amount) {
     return web3.utils.soliditySha3(
         {type: 'address', value: contractAddress},
@@ -26,7 +27,7 @@ function signPayment(contractAddress, amount, callback) {
     signMessage(message, callback);
 }
 
-let contractAddress = '0x6470c70FE81fb7EeeE53085C50b42Fb70e91D2e0';
+let contractAddress = "0x0b2886fbb46fa1ba192356a99c403b41d01975be";
 
 signPayment(
     contractAddress,
@@ -34,11 +35,33 @@ signPayment(
     function(error, signature) {
         console.log("Contract: ", contractAddress);
 
-        if(error) {
+        if (error) {
             console.error(error);
-        }
-        else {
+        } else {
             console.log("Signature: ", signature);
         }
     }
 );
+
+
+// verify signature (need to update)
+function prefixed(hash) {
+    return ethereumjs.ABI.soliditySHA3(
+        ["string", "bytes32"],
+        ["\x19Ethereum Signed Message:\n32", hash]
+    );
+}
+
+function recoverSigner(message, signature) {
+    var split = ethereumjs.Util.fromRpcSig(signature);
+    var publicKey = ethereumjs.Util.ecrecover(message, split.v, split.r, split.s);
+    var signer = ethereumjs.Util.pubToAddress(publicKey).toString("hex");
+    return signer;
+}
+
+function isValidSignature(contractAddress, amount, signature, expectedSigner) {
+    var message = prefixed(constructPaymentMessage(contractAddress, amount));
+    var signer = recoverSigner(message, signature);
+    return signer.toLowerCase() ==
+        ethereumjs.Util.stripHexPrefix(expectedSigner).toLowerCase();
+}
