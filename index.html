@@ -376,16 +376,13 @@
                         if (error) {
                             console.error(error);
                         } else {
-                            signedSignature = signature;
                             console.log("Signature: ", signature);
+                            signedSignature = signature;
+                            alert("Please copy the following message & signature and securely send them to the receiver.\n Message:\n" + paymentMessage + "\nSignature:\n" + signedSignature);
                         }
                     }
                 );
-                
-                // need to figure out
-                alert("Please copy the following message & signature and securely send them to the receiver\n. \
-                Message:\n" + paymentMessage + "\nSignature:\n" + signedSignature);
-                
+
                 // ask about this
                 // let userName = document.getElementById("name").value;
                 // let userScore = parseFloat(document.getElementById("score").value);
