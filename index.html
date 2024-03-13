@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Ethereum Transfer Interface</title>
-    <!-- <link rel="stylesheet" href="styles.css"> -->
+    <link rel="stylesheet" href="styles.css">
 </head>
 
 <body>
@@ -84,6 +84,7 @@
         <button id="saveButton">Save Addresses</button>
 
         <script src="https://cdn.jsdelivr.net/npm/web3@1.3.5/dist/web3.min.js"></script>
+
         <!-- Getting address input and save it to use with the contract Minh-->
         <!-- Right now I can save the input -->
         <!-- Need to work on how to put it into the contract -->
@@ -127,8 +128,16 @@
         <button id="deployContractButton">Deploy Contract</button>
         <!-- Deploy contract function -->
         <!-- Work in progress Minh -->
+        <!-- will look into using ethers for deploying / closing contract (Isa) -->
         <!-- Replace the ABI and ByteCode -->
         <script src="https://cdn.jsdelivr.net/npm/web3@1.3.5/dist/web3.min.js"></script>
+
+        <!-- ethers.js -->
+        <script> src="https://cdn.ethers.io/lib/ethers-5.2.umd.min.js"
+            type="application/javascript" </script>
+
+        <!-- <script type="module" src="deploy.js"></script> -->
+
         <script>
             document.addEventListener("DOMContentLoaded", function () {
                 const deployButton = document.getElementById("deployContractButton");
@@ -244,7 +253,7 @@
                             ];
 
                             // Put in Solidity contract bytecode (from Remix compiled contract)
-                            const contractBytecode = "608060405260405162000b8138038062000b81833981810160405281019062000029919062000161565b335f806101000a81548173ffffffffffffffffffffffffffffffffffffffff021916908373ffffffffffffffffffffffffffffffffffffffff1602179055508160015f6101000a81548173ffffffffffffffffffffffffffffffffffffffff021916908373ffffffffffffffffffffffffffffffffffffffff1602179055508042620000b69190620001d3565b60028190555050506200020d565b5f80fd5b5f73ffffffffffffffffffffffffffffffffffffffff82169050919050565b5f620000f382620000c8565b9050919050565b6200010581620000e7565b811462000110575f80fd5b50565b5f815190506200012381620000fa565b92915050565b5f819050919050565b6200013d8162000129565b811462000148575f80fd5b50565b5f815190506200015b8162000132565b92915050565b5f80604083850312156200017a5762000179620000c4565b5b5f620001898582860162000113565b92505060206200019c858286016200014b565b9150509250929050565b7f4e487b71000000000000000000000000000000000000000000000000000000005f52601160045260245ffd5b5f620001df8262000129565b9150620001ec8362000129565b9250828201905080821115620002075762000206620001a6565b5b92915050565b610966806200021b5f395ff3fe608060405234801561000f575f80fd5b5060043610610060575f3560e01c80630e1da6c314610064578063415ffba71461006e5780634665096d1461008a57806366d003ac146100a857806367e404ce146100c65780639714378c146100e4575b5f80fd5b61006c610100565b005b61008860048036038101906100839190610640565b610173565b005b6100926102a9565b60405161009f91906106a9565b60405180910390f35b6100b06102af565b6040516100bd9190610701565b60405180910390f35b6100ce6102d4565b6040516100db9190610701565b60405180910390f35b6100fe60048036038101906100f9919061071a565b6102f7565b005b60025442101561010e575f80fd5b5f8054906101000a900473ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff166108fc4790811502906040515f60405180830381858888f19350505050158015610170573d5f803e3d5ffd5b50565b60015f9054906101000a900473ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff163373ffffffffffffffffffffffffffffffffffffffff16146101cb575f80fd5b6101d58282610364565b6101dd575f80fd5b60015f9054906101000a900473ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff166108fc8390811502906040515f60405180830381858888f19350505050158015610241573d5f803e3d5ffd5b505f8054906101000a900473ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff166108fc4790811502906040515f60405180830381858888f193505050501580156102a4573d5f803e3d5ffd5b505050565b60025481565b60015f9054906101000a900473ffffffffffffffffffffffffffffffffffffffff1681565b5f8054906101000a900473ffffffffffffffffffffffffffffffffffffffff1681565b5f8054906101000a900473ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff163373ffffffffffffffffffffffffffffffffffffffff161461034d575f80fd5b600254811161035a575f80fd5b8060028190555050565b5f80610397308560405160200161037c9291906107f6565b604051602081830303815290604052805190602001206103f9565b90505f8054906101000a900473ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff166103d98285610428565b73ffffffffffffffffffffffffffffffffffffffff161491505092915050565b5f8160405160200161040b919061089e565b604051602081830303815290604052805190602001209050919050565b5f805f8061043585610492565b9250925092506001868484846040515f815260200160405260405161045d94939291906108ed565b6020604051602081039080840390855afa15801561047d573d5f803e3d5ffd5b50505060206040510351935050505092915050565b5f805f60418451146104a2575f80fd5b602084015191506040840151905060608401515f1a92509193909250565b5f604051905090565b5f80fd5b5f80fd5b5f819050919050565b6104e3816104d1565b81146104ed575f80fd5b50565b5f813590506104fe816104da565b92915050565b5f80fd5b5f80fd5b5f601f19601f8301169050919050565b7f4e487b71000000000000000000000000000000000000000000000000000000005f52604160045260245ffd5b6105528261050c565b810181811067ffffffffffffffff821117156105715761057061051c565b5b80604052505050565b5f6105836104c0565b905061058f8282610549565b919050565b5f67ffffffffffffffff8211156105ae576105ad61051c565b5b6105b78261050c565b9050602081019050919050565b828183375f83830152505050565b5f6105e46105df84610594565b61057a565b905082815260208101848484011115610600576105ff610508565b5b61060b8482856105c4565b509392505050565b5f82601f83011261062757610626610504565b5b81356106378482602086016105d2565b91505092915050565b5f8060408385031215610656576106556104c9565b5b5f610663858286016104f0565b925050602083013567ffffffffffffffff811115610684576106836104cd565b5b61069085828601610613565b9150509250929050565b6106a3816104d1565b82525050565b5f6020820190506106bc5f83018461069a565b92915050565b5f73ffffffffffffffffffffffffffffffffffffffff82169050919050565b5f6106eb826106c2565b9050919050565b6106fb816106e1565b82525050565b5f6020820190506107145f8301846106f2565b92915050565b5f6020828403121561072f5761072e6104c9565b5b5f61073c848285016104f0565b91505092915050565b5f819050919050565b5f61076861076361075e846106c2565b610745565b6106c2565b9050919050565b5f6107798261074e565b9050919050565b5f61078a8261076f565b9050919050565b5f8160601b9050919050565b5f6107a782610791565b9050919050565b5f6107b88261079d565b9050919050565b6107d06107cb82610780565b6107ae565b82525050565b5f819050919050565b6107f06107eb826104d1565b6107d6565b82525050565b5f61080182856107bf565b60148201915061081182846107df565b6020820191508190509392505050565b5f81905092915050565b7f19457468657265756d205369676e6564204d6573736167653a0a3332000000005f82015250565b5f61085f601c83610821565b915061086a8261082b565b601c82019050919050565b5f819050919050565b5f819050919050565b61089861089382610875565b61087e565b82525050565b5f6108a882610853565b91506108b48284610887565b60208201915081905092915050565b6108cc81610875565b82525050565b5f60ff82169050919050565b6108e7816108d2565b82525050565b5f6080820190506109005f8301876108c3565b61090d60208301866108de565b61091a60408301856108c3565b61092760608301846108c3565b9594505050505056fea26469706673582212203fa108247f6f8e71f528ede8a87f6ace7745424ec29e5cb6690a1074a30a4dc764736f6c63430008180033"; // Your contract's bytecode goes here
+                            const contractBytecode = "608060405260405162000b2538038062000b25833981810160405281019062000029919062000161565b335f806101000a81548173ffffffffffffffffffffffffffffffffffffffff021916908373ffffffffffffffffffffffffffffffffffffffff1602179055508160015f6101000a81548173ffffffffffffffffffffffffffffffffffffffff021916908373ffffffffffffffffffffffffffffffffffffffff1602179055508042620000b69190620001d3565b60028190555050506200020d565b5f80fd5b5f73ffffffffffffffffffffffffffffffffffffffff82169050919050565b5f620000f382620000c8565b9050919050565b6200010581620000e7565b811462000110575f80fd5b50565b5f815190506200012381620000fa565b92915050565b5f819050919050565b6200013d8162000129565b811462000148575f80fd5b50565b5f815190506200015b8162000132565b92915050565b5f80604083850312156200017a5762000179620000c4565b5b5f620001898582860162000113565b92505060206200019c858286016200014b565b9150509250929050565b7f4e487b71000000000000000000000000000000000000000000000000000000005f52601160045260245ffd5b5f620001df8262000129565b9150620001ec8362000129565b9250828201905080821115620002075762000206620001a6565b5b92915050565b61090a806200021b5f395ff3fe608060405234801561000f575f80fd5b5060043610610060575f3560e01c80630e1da6c314610064578063415ffba71461006e5780634665096d1461008a57806366d003ac146100a857806367e404ce146100c65780639714378c146100e4575b5f80fd5b61006c610100565b005b610088600480360381019061008391906105e4565b610146565b005b61009261024d565b60405161009f919061064d565b60405180910390f35b6100b0610253565b6040516100bd91906106a5565b60405180910390f35b6100ce610278565b6040516100db91906106a5565b60405180910390f35b6100fe60048036038101906100f991906106be565b61029b565b005b60025442101561010e575f80fd5b5f8054906101000a900473ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff16ff5b60015f9054906101000a900473ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff163373ffffffffffffffffffffffffffffffffffffffff161461019e575f80fd5b6101a88282610308565b6101b0575f80fd5b60015f9054906101000a900473ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff166108fc8390811502906040515f60405180830381858888f19350505050158015610214573d5f803e3d5ffd5b505f8054906101000a900473ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff16ff5b60025481565b60015f9054906101000a900473ffffffffffffffffffffffffffffffffffffffff1681565b5f8054906101000a900473ffffffffffffffffffffffffffffffffffffffff1681565b5f8054906101000a900473ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff163373ffffffffffffffffffffffffffffffffffffffff16146102f1575f80fd5b60025481116102fe575f80fd5b8060028190555050565b5f8061033b308560405160200161032092919061079a565b6040516020818303038152906040528051906020012061039d565b90505f8054906101000a900473ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff1661037d82856103cc565b73ffffffffffffffffffffffffffffffffffffffff161491505092915050565b5f816040516020016103af9190610842565b604051602081830303815290604052805190602001209050919050565b5f805f806103d985610436565b9250925092506001868484846040515f81526020016040526040516104019493929190610891565b6020604051602081039080840390855afa158015610421573d5f803e3d5ffd5b50505060206040510351935050505092915050565b5f805f6041845114610446575f80fd5b602084015191506040840151905060608401515f1a92509193909250565b5f604051905090565b5f80fd5b5f80fd5b5f819050919050565b61048781610475565b8114610491575f80fd5b50565b5f813590506104a28161047e565b92915050565b5f80fd5b5f80fd5b5f601f19601f8301169050919050565b7f4e487b71000000000000000000000000000000000000000000000000000000005f52604160045260245ffd5b6104f6826104b0565b810181811067ffffffffffffffff82111715610515576105146104c0565b5b80604052505050565b5f610527610464565b905061053382826104ed565b919050565b5f67ffffffffffffffff821115610552576105516104c0565b5b61055b826104b0565b9050602081019050919050565b828183375f83830152505050565b5f61058861058384610538565b61051e565b9050828152602081018484840111156105a4576105a36104ac565b5b6105af848285610568565b509392505050565b5f82601f8301126105cb576105ca6104a8565b5b81356105db848260208601610576565b91505092915050565b5f80604083850312156105fa576105f961046d565b5b5f61060785828601610494565b925050602083013567ffffffffffffffff81111561062857610627610471565b5b610634858286016105b7565b9150509250929050565b61064781610475565b82525050565b5f6020820190506106605f83018461063e565b92915050565b5f73ffffffffffffffffffffffffffffffffffffffff82169050919050565b5f61068f82610666565b9050919050565b61069f81610685565b82525050565b5f6020820190506106b85f830184610696565b92915050565b5f602082840312156106d3576106d261046d565b5b5f6106e084828501610494565b91505092915050565b5f819050919050565b5f61070c61070761070284610666565b6106e9565b610666565b9050919050565b5f61071d826106f2565b9050919050565b5f61072e82610713565b9050919050565b5f8160601b9050919050565b5f61074b82610735565b9050919050565b5f61075c82610741565b9050919050565b61077461076f82610724565b610752565b82525050565b5f819050919050565b61079461078f82610475565b61077a565b82525050565b5f6107a58285610763565b6014820191506107b58284610783565b6020820191508190509392505050565b5f81905092915050565b7f19457468657265756d205369676e6564204d6573736167653a0a3332000000005f82015250565b5f610803601c836107c5565b915061080e826107cf565b601c82019050919050565b5f819050919050565b5f819050919050565b61083c61083782610819565b610822565b82525050565b5f61084c826107f7565b9150610858828461082b565b60208201915081905092915050565b61087081610819565b82525050565b5f60ff82169050919050565b61088b81610876565b82525050565b5f6080820190506108a45f830187610867565b6108b16020830186610882565b6108be6040830185610867565b6108cb6060830184610867565b9594505050505056fea26469706673582212201381f46387f12dda9387325a0717e9010ad0d09d0a140c3648390589f0bdf13a64736f6c63430008160033"; // Your contract's bytecode goes here
 
                             // Create a new contract instance
                             const contract = new web3.eth.Contract(contractABI);
@@ -273,7 +282,7 @@
 
         <!-- Log a New Channel-->
         <!-- completed - Medha :) -->
-        <h3>Log a New Channel</h3>
+        <!-- <h3>Log a New Channel</h3>
         <p> Enter the details of your newly created payment channel.</p>
 
         <head>
@@ -308,7 +317,7 @@
                     return false;
                 }
             </script>
-        </body>
+        </body> -->
 
 
         <!-- Log Payments on Existing Channel -->
@@ -361,29 +370,58 @@
             let amount;
             let signedSignature;
             let paymentMessage;
+            var click = 1;
+            var current;
 
             submit.addEventListener("click", function () {
                 contractAddress = document.getElementById("name").value;
                 amount = document.getElementById("score").value;
                 paymentMessage = constructPaymentMessage(contractAddress, amount);
+                //current = amount;
 
-                signPayment(
-                    contractAddress,
-                    amount,
-                    function(error, signature) {
-                        console.log("Contract: ", contractAddress);
+                if (click == 1)
+                {
+                    signPayment(
+                        contractAddress,
+                        amount,
+                        function(error, signature) {
+                            console.log("Contract: ", contractAddress);
 
-                        if (error) {
-                            console.error(error);
-                        } else {
-                            console.log("Signature: ", signature);
-                            signedSignature = signature;
-                            alert("Please copy the following message & signature and securely send them to the receiver.\n Message:\n" + paymentMessage + "\nSignature:\n" + signedSignature);
+                            if (error) {
+                                console.error(error);
+                            } else {
+                                console.log("Signature: ", signature);
+                                signedSignature = signature;
+                                alert("Please copy the following message & signature and securely send them to the receiver.\n Message:\n" + paymentMessage + "\nSignature:\n" + signedSignature);
+                                click += 1;
+            
+                                let userName = document.getElementById("name").value;
+                                let userScore = parseFloat(document.getElementById("score").value);
+                                current = userScore;
+                                // const current = parseFloat(localStorage.getItem(userName))
+                                newAmount = current;
+                                /* the new amount is the previously logged amount + the newly entered amount */
+                                userData = localStorage.setItem(userName, newAmount);
+                                /* save the new amount under the key of the contract address */
+                                console.log(newAmount);   
+                                alert("\nTotal amount owed to address " + accounts[1] + " is " + newAmount);
+                            }
                         }
-                    }
-                );
+                    );
+                } else {           
+                let userName = document.getElementById("name").value;
+                let userScore = parseFloat(document.getElementById("score").value);
+                current += userScore;
 
-                // ask about this
+                newAmount = current;
+                /* the new amount is the previously logged amount + the newly entered amount */
+                userData = localStorage.setItem(userName, newAmount);
+                /* save the new amount under the key of the contract address */
+                console.log(newAmount);     
+                alert("\nTotal amount owed to address " + accounts[1] + " is " + newAmount);               
+                };
+
+                // const amount = document.getElementById("score").value;              
                 // let userName = document.getElementById("name").value;
                 // let userScore = parseFloat(document.getElementById("score").value);
 
@@ -393,8 +431,8 @@
                 // userData = localStorage.setItem(userName, newAmount);
                 // /* save the new amount under the key of the contract address */
                 // console.log(newAmount);
-                // alert("Please copy the following message and securely send it to the receiver: \nTotal amount owed to address " + userName + " is " + newAmount + " (signature: " + senderSignature + ")");
-                // return false;
+                // // alert("Please copy the following message and securely send it to the receiver: \nTotal amount owed to address " + userName + " is " + newAmount + " (signature: " + senderSignature + ")");
+                // // return false;
             });
 
         });
@@ -418,25 +456,25 @@
         //             }
         //         }
         //     );
-        //     // const receiverInput = document.getElementById("receiver");
-        //     // const receiverAddress = receiverInput.value;
-        //     // const amount = document.getElementById("score").value;
-        //     // console.log(receiverAddress);
+            // const receiverInput = document.getElementById("receiver");
+            // const receiverAddress = receiverInput.value;
+            // const amount = document.getElementById("score").value;
+            // console.log(receiverAddress);
 
-        //     // let senderSignature = signPayment(receiverAddress, amount, nonce, contractAddress);
+            // // let senderSignature = signPayment(receiverAddress, amount, nonce, contractAddress);
 
-        //     //end signature code
-        //     let userName = document.getElementById("name").value;
-        //     let userScore = parseFloat(document.getElementById("score").value);
+            // //end signature code
+            // let userName = document.getElementById("name").value;
+            // let userScore = parseFloat(document.getElementById("score").value);
 
-        //     const current = parseFloat(localStorage.getItem(userName))
-        //     newAmount = userScore + current;
-        //     /* the new amount is the previously logged amount + the newly entered amount */
-        //     userData = localStorage.setItem(userName, newAmount);
-        //     /* save the new amount under the key of the contract address */
-        //     console.log(newAmount);
-        //     alert("Please copy the following message and securely send it to the receiver: \nTotal amount owed to address " + userName + " is " + newAmount + " (signature: " + senderSignature + ")");
-        //     return false;
+            // const current = parseFloat(localStorage.getItem(userName))
+            // newAmount = userScore + current;
+            // /* the new amount is the previously logged amount + the newly entered amount */
+            // userData = localStorage.setItem(userName, newAmount);
+            // /* save the new amount under the key of the contract address */
+            // console.log(newAmount);
+            // alert("Please copy the following message and securely send it to the receiver: \nTotal amount owed to address " + userName + " is " + newAmount + " (signature: " + senderSignature + ")");
+            // return false;
         // }
     </script>
 </body>
@@ -460,6 +498,143 @@
     </head>
 
     <body>
+        
+        <label for="contract">Contract Address:</label>
+        <input type="text" id="contract" required>
+
+        <label for="signature">Signature:</label>
+        <input type="text" id="signature" required>
+
+        <label for="amount">Amount (ETH):</label>
+        <input type="text" id="amount" required>
+
+        <button id="close">Close Channel</button>
+
+        <script>
+            const contractABI = [
+                // Put in our Solidity Contract's ABI here in the []
+                [
+                    {
+                        "inputs": [
+                            {
+                                "internalType": "address payable",
+                                "name": "recipientAddress",
+                                "type": "address"
+                            },
+                            {
+                                "internalType": "uint256",
+                                "name": "duration",
+                                "type": "uint256"
+                            }
+                        ],
+                        "stateMutability": "payable",
+                        "type": "constructor"
+                    },
+                    {
+                        "inputs": [],
+                        "name": "claimTimeout",
+                        "outputs": [],
+                        "stateMutability": "nonpayable",
+                        "type": "function"
+                    },
+                    {
+                        "inputs": [
+                            {
+                                "internalType": "uint256",
+                                "name": "amount",
+                                "type": "uint256"
+                            },
+                            {
+                                "internalType": "bytes",
+                                "name": "signature",
+                                "type": "bytes"
+                            }
+                        ],
+                        "name": "close",
+                        "outputs": [],
+                        "stateMutability": "nonpayable",
+                        "type": "function"
+                    },
+                    {
+                        "inputs": [],
+                        "name": "expiration",
+                        "outputs": [
+                            {
+                                "internalType": "uint256",
+                                "name": "",
+                                "type": "uint256"
+                            }
+                        ],
+                        "stateMutability": "view",
+                        "type": "function"
+                    },
+                    {
+                        "inputs": [
+                            {
+                                "internalType": "uint256",
+                                "name": "newExpiration",
+                                "type": "uint256"
+                            }
+                        ],
+                        "name": "extend",
+                        "outputs": [],
+                        "stateMutability": "nonpayable",
+                        "type": "function"
+                    },
+                    {
+                        "inputs": [],
+                        "name": "recipient",
+                        "outputs": [
+                            {
+                                "internalType": "address payable",
+                                "name": "",
+                                "type": "address"
+                            }
+                        ],
+                        "stateMutability": "view",
+                        "type": "function"
+                    },
+                    {
+                        "inputs": [],
+                        "name": "sender",
+                        "outputs": [
+                            {
+                                "internalType": "address payable",
+                                "name": "",
+                                "type": "address"
+                            }
+                        ],
+                        "stateMutability": "view",
+                        "type": "function"
+                    }
+                ]
+            ];
+
+
+            document.addEventListener("DOMContentLoaded", function () {
+                const contract = new web3.eth.Contract(contractABI);
+                const closeContract = document.getElementById("close");
+                let contractAddress;
+                let signature;
+                let amount;
+                
+                closeContract.addEventListener("click", function () {
+                    console.log(contract);
+                    contractAddress = document.getElementById("contract").value;
+                    signature = document.getElementById("signature").value;
+                    amount = document.getElementById("amount").value;
+
+                    contract.methods.close(amount, signature).send({ from: accounts[1]})
+                    .then((receipt) => {
+                        console.log(receipt);
+                    })
+                    .catch((error) => {
+                        console.error(error);
+                    });
+                });
+            });
+        </script>
+
         <!-- <form onsubmit="return closeChannel()">
             <label for="currentAddress">Contract Address:</label>
             <input type="text" id="currentAddress" required>
