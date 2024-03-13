@@ -415,17 +415,40 @@
                             }
                         }
                     );
-                } else {           
-                let userName = document.getElementById("name").value;
-                let userScore = parseFloat(document.getElementById("score").value);
-                current += userScore;
+                } else {    
+                    signPayment(
+                        contractAddress,
+                        1,
+                        function(error, signature) {
+                            console.log("Contract: ", contractAddress);
 
-                newAmount = current;
-                /* the new amount is the previously logged amount + the newly entered amount */
-                userData = localStorage.setItem(userName, newAmount);
-                /* save the new amount under the key of the contract address */
-                console.log(newAmount);     
-                alert("\nTotal amount owed to address " + accounts[1] + " is " + newAmount);               
+                            if (error) {
+                                console.error(error);
+                            } else {
+                                console.log("Signature: ", signature);
+                                let userName = document.getElementById("name").value;
+                                let userScore = parseFloat(document.getElementById("score").value);
+                                current += userScore;
+
+                                newAmount = current;
+                                /* the new amount is the previously logged amount + the newly entered amount */
+                                userData = localStorage.setItem(userName, newAmount);
+                                /* save the new amount under the key of the contract address */
+                                console.log(newAmount);     
+                                alert("\nTotal amount owed to address " + accounts[1] + " is " + newAmount);                                
+                            }
+                        }
+                    );       
+                // let userName = document.getElementById("name").value;
+                // let userScore = parseFloat(document.getElementById("score").value);
+                // current += userScore;
+
+                // newAmount = current;
+                // /* the new amount is the previously logged amount + the newly entered amount */
+                // userData = localStorage.setItem(userName, newAmount);
+                // /* save the new amount under the key of the contract address */
+                // console.log(newAmount);     
+                // alert("\nTotal amount owed to address " + accounts[1] + " is " + newAmount);               
                 };
 
                 // const amount = document.getElementById("score").value;              
@@ -507,6 +530,10 @@
     <body>
         <label for="currentAddress">Contract Address:</label>
         <input type="text" id="currentAddress" required>
+
+        <label for="signatureInput">Signature:</label>
+        <input type="text" id="signatureInput" required>
+
         <button id="closeButton">Close Channel</button>
 
         <script>
