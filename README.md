@@ -59,9 +59,8 @@ Note: this action is irreversible <br>
 Enter the contract address under "Close Channel" <br>
 Enter the most recently generated signature <br>
 Click "Close Channel" <br>
-The receiver should receive the total Ether once the transaction goes through
-The channel will officially close and can no longer be interacted with from this point
-<br>
+The receiver should receive the total Ether once the transaction goes through <br>
+The channel will officially close and can no longer be interacted with from this point <br>
 
 # Our Features
 *Connecting to MetaMask* <br>
