@@ -50,7 +50,7 @@ Click "Submit"<br>
 <br>
 *Logging Payments on an Existing Channel* <br>
 Under "Log Payments on an Existing Channel", enter the contract address <br>
-Input the amount of Ethereum you would like to send to the receiver <br>
+Input the amount of Ether you would like to send to the receiver <br>
 Click "Log Payment" <br>
 Save the unique signature that is generated <br>
 <br>
@@ -59,7 +59,9 @@ Note: this action is irreversible <br>
 Enter the contract address under "Close Channel" <br>
 Enter the most recently generated signature <br>
 Click "Close Channel" <br>
-The receiver should receive the Ethereum once the transaction goes through <br>
+The receiver should receive the total Ether once the transaction goes through
+The channel will officially close and can no longer be interacted with from this point
+<br>
 
 # Our Features
 *Connecting to MetaMask* <br>
