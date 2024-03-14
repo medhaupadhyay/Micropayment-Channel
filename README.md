@@ -1,5 +1,6 @@
 # Micropayment-Channel
 Micropayment Channel Capstone Project <br>
+Project Website: https://medhaupadhyay.github.io/Micropayment-Channel-Public-Website/ <br>
 Template Code taken from https://docs.soliditylang.org/en/latest/solidity-by-example.html#micropayment-channel
 
 # Deploying the Smart Contract
